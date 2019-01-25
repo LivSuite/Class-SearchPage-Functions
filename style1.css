@@ -1,0 +1,360 @@
+body {
+	background-image: linear-gradient(to bottom right, #01C3FE , #FEFE01);
+	font-size: 100%;
+}
+
+.everything {
+	display: flex;
+	/*flex-flow: column wrap;*/
+	flex-grow: 1;
+	/*Might want to adjust the proportion of the page items*/
+	column-rule-width: 0px;
+	justify-content: flex-start;
+	padding: 10px;
+	height: 600px;/*was 550 px*/
+	border: 2px solid white;
+	border-radius: 15px 15px 15px 50px;
+	overflow: hidden;
+	position: relative;
+}
+
+.filterTable {
+	background-color: white;
+	display: flex;
+	flex-flow: column wrap;
+	width: 250px;
+	margin: 0px;
+	min-height: 100px;
+	border: 0px solid;
+	border-radius: 15px 15px 15px 50px;
+	padding: 25px 10px;
+	box-shadow: 3px 3px 2px indigo;
+	overflow: visible;
+	/*background-color: -webkit-gradient(linear, left bottom, left top, color-stop(0.33, rgb(14,173,173)), color-stop(0.67, rgb(0,255,255)));*/
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+/*.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+} */
+
+
+.title {
+	display: flex;
+	flex-flow: column wrap;
+	text-align: center;
+	color: indigo;
+	/*border: 5px solid blue;
+	background-color: yellow;*/
+	margin: 5px 0px 0px 0px;
+	padding-bottom: 0px;
+}
+
+.schedule {
+	display: flex;
+	flex-flow: column wrap;
+	margin: 3px;
+	padding: 3px;
+	background-clip: padding-box;
+	/*background: lightblue;
+	border: 5px solid;
+	padding-color: red;*/
+}
+
+.userradius {
+	display: flex;
+	flex-direction: row;
+	margin-top: 0px;
+	padding: 0px;
+}
+
+.class {
+	display: flex;
+	flex-direction: row;
+}
+
+.classtimes {
+	display: flex;
+	flex-direction: column;
+	margin-left: 0px;
+}
+
+.classdates {
+	display: flex;
+	flex-direction: column;
+}
+
+.emptybox {
+	display: inline-block;
+	width: 20px;
+}
+
+.fitnessType {
+	display: flex;
+	flex-direction: column;
+}
+
+hr {
+	display: white;
+	margin-left: .5em;
+	margin-right: .5em;
+}
+
+.button {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 0px;
+	padding: 10px;
+	transition-duration: 0.4s;
+	text-align: center;
+	background-color: white;
+	color: black;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 15px;
+}
+
+.button1:hover {
+	background-image: linear-gradient(to right, lightGreen , Blue);
+	color: white;
+}
+
+/* This is a comment */
+
+/*Class Finder*/
+
+#classFinder {
+    display: flex;
+    background-color: white;
+    width: 400px;
+    margin-left: 5px;
+    border-radius: 15px 0px 0px 15px;
+    padding: 5px;
+    box-shadow: 3px 3px 2px indigo;
+}
+
+#searchTable {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+	background-color: lightblue;
+	border-radius: 15px;
+	width: 95%;
+	height: 90%;
+	padding: 5px;
+	overflow-y: auto;
+}
+/*
+.redBox {
+  visibility:visible;
+  position:absolute;
+  left: 200px;
+  background:lightgrey;
+  border:3px solid #666666;
+  width:40%;
+  height:74%;
+  left:15%; 
+  z-index:14;
+}
+*/
+/*
+#photoBox {
+	visibility:visible;
+  position:absolute;
+  background:green;
+  border:3px solid #666666;
+  width:34%;
+  height:40%;
+  left:15.5%; 
+  z-index:18;
+}*/
+
+.classbox {
+	display: flex;
+	background-color: white;
+	flex-flow: row wrap;
+	padding: 10px;
+	border-radius: 15px;
+	width: 95%;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.classbox:hover {
+	background-color: lightGreen;
+}
+
+.initialClassInfo {
+	display: flex;
+	width: 100%;
+	padding: 5px;
+}
+
+.classInfo {
+	display: flex;
+	flex-flow: row wrap;
+	width: 80%;
+}
+
+.classTitle {
+	display: flex;
+	font-family: 'Arial';
+	height: 50%;
+	width: 80%;
+	background-color: yellow;
+	vertical-align: middle;
+}
+
+.classDecision {
+	display: flex;
+	flex-flow: row wrap;
+	width: 20%;
+}
+
+.moreInfoButton {
+	display: flex;
+	border-radius: 5px;
+	width: 100%;
+	margin: .1px;
+	text-align: center;
+}
+
+.moreInfoButton:hover {
+	box-shadow: .5px .5px .5px .5px indigo;
+	background-image: linear-gradient(to right, lightGreen , Blue);
+	color: white;
+	border: none;
+}
+
+#moreInfoBox {
+	width: 100%;
+}
+
+.tablescroll {
+	overflow: scroll;
+	height: 400px;
+}
+
+/*Map CSS*/
+
+/*POP UP FOR REGISTRATION*/
+	.popup-overlay{
+  /*Hides pop-up when there is no "active" class*/
+	visibility:hidden;
+	position:absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 8;
+	background-color: #8F8E8E;
+	opacity: 0.5;
+}
+
+.popup-content {
+/*Hides pop-up content when there is no "active" class*/
+  position:absolute;
+  visibility:hidden;
+  background: #ffffff;
+  z-index: 9;
+  
+}
+
+.popup-overlay:active{
+  /*displays pop-up when "active" class is present*/
+  visibility:visible;
+  text-align:center;
+  z-index:8;
+}
+
+.popup-content:active{
+  /*Shows pop-up content when "active" class is present*/
+  
+ /* background:#ffffff; */
+  visibility:visible;
+  z-index:9;
+  color: purple;
+  border:3px solid #666666;
+  border-radius: 5px;
+  width:50%;
+  height:50%;
+  left:15%;
+  margin: 0 auto;
+  top: 25%;
+  box-shadow: 3px 3px 2px indigo;
+  align: center;
+   z-index: 9;
+}
+
+#map {
+	display: flex;
+	/*flex-direction: column;*/
+	height: 400px;
+	width: 400px;
+	margin: 0px;
+	right: 0;
+    box-shadow: 3px 3px 2px indigo;
+    border-radius: 0px 15px 15px 0px;
+    border: 1px 0px solid white;
+    padding: 5px;
+}
+     
+#description {
+	font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#infowindow-content .title {
+    font-weight: bold;
+}
+
+#infowindow-content {
+	display: none;
+}
+
+#map #infowindow-content {
+    display: inline;
+}
+
+#title {
+	color: #fff;
+    /*background-color: #4d90fe;*/
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
+}
+
+#target {
+    width: 345px;
+}
+      
+#mapAndPopup {
+	position: relative;
+}
+  
+#row1{
+    display:flex;
+    flex-direction:row;
+	justify-content: space-around;
+}
+
+#filter{
+    display:flex;
+    flex-direction:column;
+}

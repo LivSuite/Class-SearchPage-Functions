@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+ <script src="clienFunctions1.js"></script>
+ <script>
+ // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCZS5qCWuiGWvsJPxfsRzqpALMdgKc8fF8",
+      authDomain: "livsuiteform.firebaseapp.com",
+      databaseURL: "https://livsuiteform-1001.firebaseio.com",
+      projectId: "livsuiteform",
+      storageBucket: "livsuiteform.appspot.com",
+      messagingSenderId: "203552205914"
+    };
+    firebase.initializeApp(config);
+  
+  </script>
+	<title>LivSuite Search</title>
+	<link rel="stylesheet" type="text/css" href="style1.css"/>
+</head>
+
+<body>
+
+
+<div class="everything">
+<div class="filterTable">
+		<h1 class="title">Class Filter</h1>
+	<div class="schedule">
+	<div id="locationFilter">
+	<form>
+	<input id="loc" name="location" type="radio" checked>Use my Location<br>
+	<input id="zip" name="location" type="radio">Enter zip code
+	<input id="enterZip" type="text">	
+	<br>
+	</form>
+			<div class="userradius" ng-app="" ng-init="distanceSlider=10">
+				<!-- Create a slider for radius of fitness facility -->
+				<p>Maximum Distance from You<br>
+					<input type="range" min="1" max="25" value="10" ng-model="distanceSlider">
+					<br>
+					<label id"distanceLabel">{{distanceSlider + " Miles"}}<label>
+					
+				
+					<!-- <input type="text" id="textInput" value="10 Miles"> -->
+				</p>
+			</div>
+			</div>
+			<div class="class">
+				<div class="classdates">
+					Days
+					<label><input id="Mon" type="checkbox"/>Mon</label>
+					<label><input id="Tues" type="checkbox"/>Tues</label>
+					<label><input id="Wed" type="checkbox"/>Wed</label>
+					<label><input id="Thurs" type="checkbox"/>Thurs</label>
+					<label><input id="Fri" type="checkbox"/>Fri</label>
+					<label><input id="Sat" type="checkbox"/>Sat</label>
+					<label><input id="Sun" type="checkbox"/>Sun</label>
+				</div>
+				<div class="emptybox">	
+				</div>
+				<div class="classtimes">
+				Times
+				<label><input id="beforeNoon" type="checkbox">Before Noon</label>
+				<label><input id="AfterNoon" type="checkbox">After Noon</label>
+				<label><input id="Evening" type="checkbox">Evening</label>
+				</div>
+			</div>
+	</div>
+	
+	<hr>
+
+	<div class="fitnessType">
+			Fitness Type<br>
+			<label><input id="yogaBox" type="checkbox"/>Yoga</label>
+			<label><input id="boxingBox" type="checkbox"/>Boxing</label>
+			<label><input id="liftingBox" type="checkbox"/>Lifting</label>
+			<label><input id="classBox" type="checkbox"/>Class</label>
+	</div><br>
+		<!--Once checked, fitness type should filter through locations in Firebase Database to show places with right classes-->
+	<!-- Build Functions: Function onClick-->
+
+	<button class="button button1" type="button" onclick="pleaseWork()">Search for Class</button>
+</div>
+
+
+
+<div id='classFinder' class="tablescroll">
+	<div id = "searchTable">
+		<div class="classbox">
+			<div class="classInfo"> 
+				<label class="classTitle">Introductory Yoga</label>
+				<label class="classTime">6pm-7pm |</label>
+				<label class="classLocation"> Studio A</label>
+			</div>
+			<div class ="classDecision">
+				
+				<br>
+				<button  class="moreInfo" onclick="moreInfoClick(1146)" class="24">+</button>
+			</div>
+		</div>
+		
+		<div class="classbox">
+			<label class="classTitle">Introductory Yoga</label>
+			<div class="classInfo"> 
+				<button class="moreInfo">More Info</button>
+			</div>
+			<div class ="classDecision">
+				<button onclick="openPop2()">Sign Up</button>
+			</div>
+		</div>
+		
+		<div class="classbox">
+			<label class="classTitle">Introductory Yoga</label>
+			<div class="classInfo"> 
+				<button class="moreInfo">More Info</button>
+			</div>
+			<div class ="classDecision">
+				<button onclick="openPop2()">Sign Up</button>
+			</div>
+		</div>
+		
+		<div class="classbox">
+			<label class="classTitle">Introductory Yoga</label>
+			<div class="classInfo"> 
+				<button class="moreInfo">More Info</button>
+			</div>
+			<div class ="classDecision">
+				<button onclick="openPop2()">Sign Up</button>
+			</div>
+		</div>
+		
+		<div class="classbox">
+			<label class="classTitle">Introductory Yoga</label>
+			<div class="classInfo"> 
+				<button class="moreInfo">More Info</button>
+			</div>
+			<div class ="classDecision">
+				<button onclick="openPop2()">Sign Up</button>
+			</div>
+		</div>
+		
+		
+	</div>
+</div>
+
+
+     <div id="map"></div> 
+</div>   
+
+<!--POP-UP INFO-->
+<div id="mapAndPopup">
+	<div class="popup-overlay" id ="popup-overlay1">
+		<div class="popup-content" id="popup-content1">
+			<h2>Dynamic Text(name)</h2>
+			<p> Dynamic text(a couple sentences decribing the class that was clicked on)</p>
+			<button onclick="openPop2()">Sign Up</button>
+			<button class="close">Close</button>
+		</div>  
+  	</div>
+  
+  <div class = "popup-overlay" id="popup-overlay2">
+  	<div class = "popup-content" id="popup-content2">
+   		<h2>
+          Log in to your LivSuite account to recieve an access QR for this class
+        </h2>
+        <p>
+          DISCLAIMER: This QR is only valid for the person on the account and for the class selected
+        </p>
+		<input id="userEmail" type="text" placeholder="Email">
+		<input id="userPassword" type="password" placeholder="Password">
+		
+		<button id="blogin" class="log-in">Register</button>
+		<button id="bsignup" onclick="window.location.href='/create-account'">Create Account</button>
+		<br>
+		<button class="close">Close</button>
+    </div>
+  </div>
+</div>
+
+<br></br>
+
+       <div id='row1' class="mapcontainer">
+
+<!--This should generate classes depending on filter requirements -->
+
+   
+  <script>
+   
+      var database = firebase.database();
+      var markers = [];
+      
+      var ref = database.ref('features');
+      ref.on('value', addDataToMap, errorData);
+      function addDataToMap (data){
+  
+        var points = data.val();
+        var keys = Object.keys(points);
+
+        for (var i = 0; i < keys.length; i++){
+          var k = keys[i];
+          var location = points[k].geometry.coordinates;
+        
+          var LatLng = new google.maps.LatLng(parseFloat(location[1]), parseFloat(location[0]));
+       
+          markers.push(new google.maps.Marker({
+            position: LatLng,
+            map:map,
+          }));
+          
+          var information = points[k].properties;
+         
+          addListener(LatLng, information);
+          //have it create a object to be added to the map
+        }
+      }
+      function errorData(data){
+        console.log("Could not find any data to add to the map");
+      }
+      
+      function addListener(LatLng, information){
+      
+       
+        
+        var contentString = ((information.Address).toString());
+        
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+          position: LatLng,
+          map: map,
+          title: 'Title'
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+          
+          var textNode = document.createTextNode(information.InfoText);
+          
+          var nodee = document.getElementById('Nodee');
+          
+          while (nodee.firstChild) {
+          
+          nodee.removeChild(nodee.firstChild);
+          }
+          
+          document.getElementById('Nodee').appendChild(textNode);
+          
+      
+      });
+    }
+    
+       var map, infoWindow;
+      function initMap() {
+      
+ //MARK testing search box
+  
+      // function initAutocomplete() 
+       {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 41.619549, lng: -93.598022},
+          streetViewControl: false,
+          mapTypeControl: false,
+          zoom: 11,
+          mapTypeId: 'roadmap'
+        });
+        window.map = map;
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(function(position){
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            map.setCenter(pos);
+          }, function(){
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        }
+        else {
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+       
+      
+      }
+        
+        //MARK end search testing           
+      
+    
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        
+        var nodee = document.createElement('p');
+        
+        document.getElementById('Nodee').appendChild(nodee);
+        
+     
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+     
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+	
+   function filterBy(filterType) {
+   console.log('filter function');
+    markers.forEach(function(marker) {
+    console.log('marker earased');
+            marker.setMap(null);
+            marker = null;
+          });
+          markers = [];
+   }  
+    </script>
+    <script>
+    function openPop2() {
+    console.log(openPop2);
+		$("#popup-overlay1, #popup-content1").removeClass("active");
+		console.log(document.getElementById("popup-overlay1"));
+		$("#popup-overlay2, #popup-content2").addClass("active");    
+    }
+    $(".moreInfo").on("click", moreInfoFunction());
+    
+    function moreInfoFunction() {
+   console.log("more info");
+   // $("#popup-overlay1, #popup-content1").addClass("active");
+   var nodee = document.getElementById("Nodee");
+   	while (nodee.firstChild) {
+   	nodee.removeChild(nodee.firstChild);
+   	}
+   	var textNode = document.createTextNode("class information")
+   	nodee.appendChild(textNode);
+   	var signup = document.createElement("BUTTON");
+   	var buttonText = document.createTextNode("Sign Up");
+   	signup.appendChild(buttonText);
+   	nodee.appendChild(signup);
+    }
+    $(".close").on("click", function(){
+  $(".popup-overlay, .popup-content").removeClass("active");
+});
+    </script>
+   
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByyOmbbKAhpU3JBDojPiYlV6H2VYWJrhc&callback=initMap"></script>
+    <p id = 'Nodee'></p>
+
+</div>
+</body>
+
+</html>
