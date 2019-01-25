@@ -162,7 +162,7 @@ function pullClasses(isYoga,isBoxing,isLifting,isClass) {
             map.setCenter(results[0].geometry.location);
             console.log("status ok");
   
-  console.log(results[0].geometry.location.lat.value);
+  	console.log(results[0].geometry.location.lat.value);
             window.centerPoint = new google.maps.LatLng({
 					lat: results[0].geometry.location.lat.value,
 					lng: results[0].geometry.location.lng.value            	
@@ -230,8 +230,7 @@ function pullClasses(isYoga,isBoxing,isLifting,isClass) {
 				
 					var studSerial = key;	
 					snapshot.forEach(function(data) {
-			
-						
+				
 						function addClass() {
 							
 							var classListLength = classList.length;
